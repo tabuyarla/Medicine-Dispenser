@@ -1,0 +1,2 @@
+C:/Users/dharm/StudioProjects/medicinedisp/android/app/.cxx/Debug/2j5e2vf1/x86/CMakeFiles/edit_cache.dir
+C:/Users/dharm/StudioProjects/medicinedisp/android/app/.cxx/Debug/2j5e2vf1/x86/CMakeFiles/rebuild_cache.dir

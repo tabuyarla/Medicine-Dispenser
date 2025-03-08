@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "64267650521",
+    "project_id": "healthcard-eb670",
+    "storage_bucket": "healthcard-eb670.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:64267650521:android:3e7fba3d5500d0bd0005c8",
+        "android_client_info": {
+          "package_name": "com.example.medicinedispenser"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-iJTw9PJ8aQxi8RkjLBEEVFiobfhkulE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
