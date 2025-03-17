@@ -89,33 +89,41 @@ class AboutUs extends StatelessWidget {
               const SizedBox(
                 height: 40,
               ),
+              const Text("Guide Details"),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Dr. CH VIJAY (Asst.professor)",
+                style: GoogleFonts.mali(fontSize: 22, color: Colors.red),
+              ),
               const Text("Team Details"),
               const SizedBox(
                 height: 20,
               ),
               Text(
-                "M. LAYA SRI",
+                "Y. TABURANI (213J1A04C8)",
                 style: GoogleFonts.mali(fontSize: 22, color: Colors.red),
               ),
               const SizedBox(
                 height: 5,
               ),
               Text(
-                "L. DHARANI",
+                "V. BHANU PRATAP (213J1A04B8)",
                 style: GoogleFonts.mali(fontSize: 22, color: Colors.red),
               ),
               const SizedBox(
                 height: 5,
               ),
               Text(
-                "V.RESHMI SAI",
+                "SK BASITH (213J1A04A9)",
                 style: GoogleFonts.mali(fontSize: 22, color: Colors.red),
               ),
               const SizedBox(
                 height: 5,
               ),
               Text(
-                "P. MANJULA",
+                "P BHAVANI SHANKAR (213J1A0496)",
                 style: GoogleFonts.mali(fontSize: 22, color: Colors.red),
               ),
               const SizedBox(
@@ -125,13 +133,13 @@ class AboutUs extends StatelessWidget {
                 height: 40,
               ),
               Text(
-                "Gayatri vidya parishad college of engineering for women",
+                "RAGHU INSTITUTE OF TECHNOLOGY, DAKAMARRI",
                 style: GoogleFonts.mali(
                   fontSize: 20,
                   color: Colors.black,
                 ),
                 textAlign: TextAlign.center,
-              )
+              ),
             ],
           ),
         ),

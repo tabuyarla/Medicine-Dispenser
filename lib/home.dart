@@ -15,8 +15,8 @@ DatabaseReference ref = FirebaseDatabase.instance.ref();
 
 class _HomePageState extends State<HomePage> {
   late SharedPreferences preferences;
-  String name1 = "", name2 = "", name3 = "", name4 = '', name5 = "";
-  String time1 = "", time2 = "", time3 = "", time4 = '', time5 = "";
+  String name1 = "", name2 = "", name3 = "", name4 = '', name5 = "", name6 = "";
+  String time1 = "", time2 = "", time3 = "", time4 = '', time5 = "", time6 = "";
   @override
   void initState() {
     super.initState();
@@ -42,16 +42,19 @@ class _HomePageState extends State<HomePage> {
       name3 = preferences.getString('name3') ?? '';
       name4 = preferences.getString('name4') ?? '';
       name5 = preferences.getString('name5') ?? '';
+      name6 = preferences.getString('name6') ?? '';
       time1 = preferences.getString('time1').toString();
       time2 = preferences.getString('time2').toString();
       time3 = preferences.getString('time3').toString();
       time4 = preferences.getString('time4').toString();
       time5 = preferences.getString('time5').toString();
+      time6 = preferences.getString('time6').toString();
       _controller1.text = name1;
       _controller2.text = name2;
       _controller3.text = name3;
       _controller4.text = name4;
       _controller5.text = name5;
+      _controller6.text = name6;
       if (time1 != '') {
         final time = time1.split(":");
         setState(() {
@@ -92,6 +95,14 @@ class _HomePageState extends State<HomePage> {
               minute: int.parse(time[1].substring(0, 2)));
         });
       }
+      if (time6 != '') {
+        final time = time6.split(":");
+        setState(() {
+          _timeOfDay6 = TimeOfDay(
+              hour: int.parse(time[0]),
+              minute: int.parse(time[1].substring(0, 2)));
+        });
+      }
     });
   }
 
@@ -100,12 +111,14 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _controller3 = TextEditingController();
   final TextEditingController _controller4 = TextEditingController();
   final TextEditingController _controller5 = TextEditingController();
+  final TextEditingController _controller6 = TextEditingController();
 
   TimeOfDay _timeOfDay1 = const TimeOfDay(hour: 0, minute: 0);
   TimeOfDay _timeOfDay2 = const TimeOfDay(hour: 0, minute: 0);
   TimeOfDay _timeOfDay3 = const TimeOfDay(hour: 0, minute: 0);
   TimeOfDay _timeOfDay4 = const TimeOfDay(hour: 0, minute: 0);
   TimeOfDay _timeOfDay5 = const TimeOfDay(hour: 0, minute: 0);
+  TimeOfDay _timeOfDay6 = const TimeOfDay(hour: 0, minute: 0);
 
   void _showtimepicker(String comp) {
     TimeOfDay temp = const TimeOfDay(hour: 0, minute: 0);
@@ -127,22 +140,27 @@ class _HomePageState extends State<HomePage> {
                 case "c5":
                   _timeOfDay5 = value!;
                   break;
+                case "c6":
+                  _timeOfDay6 = value!;
+                  break;
               }
             }));
   }
 
   void _saveData() async {
-    print("daved");
+    print("saved");
     name1 = _controller1.text;
     name2 = _controller2.text;
     name3 = _controller3.text;
     name4 = _controller4.text;
     name5 = _controller5.text;
+    name6 = _controller6.text;
     await preferences.setString('name1', name1);
     await preferences.setString('name2', name2);
     await preferences.setString('name3', name3);
     await preferences.setString('name4', name4);
     await preferences.setString('name5', name5);
+    await preferences.setString('name6', name6);
     await preferences.setString(
         'time1', '$_timeOfDay1.hour:$_timeOfDay1.minute');
     await preferences.setString(
@@ -154,6 +172,8 @@ class _HomePageState extends State<HomePage> {
     await preferences.setString(
         'time5', '$_timeOfDay5.hour:$_timeOfDay5.minute');
     await preferences.setString(
+        'time6', '$_timeOfDay6.hour:$_timeOfDay6.minute');
+    await preferences.setString(
         'time1', _timeOfDay1.format(context).toString());
     await preferences.setString(
         'time2', _timeOfDay2.format(context).toString());
@@ -163,24 +183,14 @@ class _HomePageState extends State<HomePage> {
         'time4', _timeOfDay4.format(context).toString());
     await preferences.setString(
         'time5', _timeOfDay5.format(context).toString());
+    await preferences.setString(
+        'time6', _timeOfDay6.format(context).toString());
     await _scheduleNotification("1", name1, _timeOfDay1, 1);
     await _scheduleNotification("2", name2, _timeOfDay2, 2);
     await _scheduleNotification("3", name3, _timeOfDay3, 3);
     await _scheduleNotification("4", name4, _timeOfDay4, 4);
     await _scheduleNotification("5", name5, _timeOfDay5, 5);
-    // try {
-    //   DatabaseReference ref = FirebaseDatabase.instance.ref("data");
-    //   await ref.set({
-    //     'comp1': _timeOfDay1.format(context).toString(),
-    //     'comp2': _timeOfDay2.format(context).toString(),
-    //     'comp3': _timeOfDay3.format(context).toString(),
-    //     'comp4': _timeOfDay4.format(context).toString(),
-    //     'comp5': _timeOfDay5.format(context).toString(),
-    //   });
-    //   print('Data sent successfully');
-    // } catch (e) {
-    //   print('Error sending data: $e');
-    // }
+    await _scheduleNotification("6", name6, _timeOfDay6, 6);
   }
 
   Future<void> _scheduleNotification(
@@ -519,6 +529,51 @@ class _HomePageState extends State<HomePage> {
                           )
                         ],
                       )),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(color: Colors.red.shade200),
+                      ),
+                      child: Column(
+                        children: [
+                          const Text(
+                            "Syrup",
+                            style: TextStyle(color: Colors.red),
+                          ),
+                          TextField(
+                            controller: _controller6,
+                            decoration: const InputDecoration(
+                                border: OutlineInputBorder(),
+                                label: Text("Syrup Name"),
+                                contentPadding: EdgeInsets.all(8)),
+                          ),
+                          const SizedBox(
+                            height: 7,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "Time: ${_timeOfDay6.format(context)}",
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              MaterialButton(
+                                onPressed: () {
+                                  _showtimepicker("c6");
+                                },
+                                color: Colors.red.shade100,
+                                child: const Text("Select Time"),
+                              )
+                            ],
+                          )
+                        ],
+                      )),
                 ],
               ),
             ),
@@ -542,6 +597,13 @@ class NotificationController {
       ReceivedNotification receivedNotification) async {
     // Your code goes here
     print("notification disp");
+    try {
+      DatabaseReference ref = FirebaseDatabase.instance.ref("data");
+      await ref.set({'comp': receivedNotification.id.toString()});
+      print('Data sent successfully');
+    } catch (e) {
+      print('Error sending data: $e');
+    }
   }
 
   /// Use this method to detect if the user dismissed a notification
@@ -555,16 +617,5 @@ class NotificationController {
   /// Use this method to detect when the user taps on a notification or action button
   @pragma("vm:entry-point")
   static Future<void> onActionReceivedMethod(
-      ReceivedAction receivedAction) async {
-    // Your code goes here
-    // print("action");
-    try {
-      DatabaseReference ref = FirebaseDatabase.instance.ref("data");
-      await ref.set({'comp': receivedAction.id.toString()});
-      print('Data sent successfully');
-    } catch (e) {
-      print('Error sending data: $e');
-    }
-    // Navigate into pages, avoiding to open the notification details page over another details page already opened
-  }
+      ReceivedAction receivedAction) async {}
 }
